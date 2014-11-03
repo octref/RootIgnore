@@ -14,8 +14,8 @@ plugin 'octref/RootIgnore'
 
 ## Usage
 
-This plugin is designed to complement CtrlP
-There is no apparent way to
+This plugin is designed to complement CtrlP.  
+There is no apparent way to:
 - Restrict search results to files under current directory
 - Honor `.gitignore` in repo root
 
