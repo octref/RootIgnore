@@ -6,7 +6,7 @@
 
 " Usage
 "
-" This plugin is designed to complement CtrlP
+" This plugin is designed to complement CtrlP & Command-T
 " There is no apparent way to
 " 1: Restrict search results to files under current directory
 " 2: Honor .gitignore in repo root
