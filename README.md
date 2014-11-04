@@ -33,7 +33,7 @@ let g:CommandTWildIgnore = &wildignore . ',myPattern"
 After installation it works automatically.
 
 This plugin is designed to complement CtrlP & Command-T.
-There is no easy way to:
+Currently, there seems to be no easy way to:
 - Restrict search results to files under current directory
 - Honor `.gitignore` in repo root
 
