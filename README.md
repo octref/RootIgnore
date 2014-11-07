@@ -12,6 +12,13 @@ by Adam Bellaire
 plugin 'octref/RootIgnore'
 ```
 
+## Option
+```
+let g:RootIgnoreAgignore = 1
+```
+Let RootIgnore set `ctrlp's g:ctrlp_user_command` to ignore
+the patterns found in repo root's gitignore
+
 ===
 
 ### Setting

@@ -28,7 +28,26 @@ function! s:WildignoreFromGitignore(gitignore)
       let igstring .= "," . line
     endfor
     execute "set wildignore+=".substitute(igstring, '^,', '', "g")
+
+    " Set ag's ignore
+    if g:RootIgnoreAgignore
+      let agignore = ''
+      for oline in readfile(a:gitignore)
+        let line = substitute(oline, '\s|\n|\r', '', "g")
+        if line =~ '^#' | con | endif
+        if line == ''   | con | endif
+        if line =~ '^!' | con | endif
+        if line =~ '/$' | let igstring .= "," . line . "*" | con | endif
+        let agignore .= " --ignore '" . line . "'"
+      endfor
+      let agcommand = 'ag %s -i --nocolor -g ""' . agignore
+      let g:ctrlp_user_command = [
+          \ '.git', agcommand,
+          \ 'find %s -type f'
+          \ ]
+    endif
   endif
+
 endfunction
 
 function! s:RootIgnore()
