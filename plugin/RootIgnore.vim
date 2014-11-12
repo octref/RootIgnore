@@ -30,7 +30,7 @@ function! s:WildignoreFromGitignore(gitignore)
     execute "set wildignore+=".substitute(igstring, '^,', '', "g")
 
     " Set ag's ignore
-    if g:RootIgnoreAgignore
+    if exists("g:RootIgnoreAgignore") && g:RootIgnoreAgignore
       let agignore = ''
       for oline in readfile(a:gitignore)
         let line = substitute(oline, '\s|\n|\r', '', "g")
