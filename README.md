@@ -16,8 +16,9 @@ plugin 'octref/RootIgnore'
 ```
 let g:RootIgnoreAgignore = 1
 ```
-Let RootIgnore set `ctrlp's g:ctrlp_user_command` to ignore
-the patterns found in repo root's gitignore
+**Requirement**: [**ag**](https://github.com/ggreer/the_silver_searcher)  
+Let RootIgnore set `ctrlp's g:ctrlp_user_command` to use **ag** to ignore
+the patterns found in repo root's gitignore.  
 
 ===
 
