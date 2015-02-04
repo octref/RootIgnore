@@ -16,23 +16,46 @@
 " foo/.gitingore ignores _*, CtrlP ignores foo/bar/_build and all results are
 " under foo/bar/
 
-function! s:WildignoreFromGitignore(gitignore)
-  if filereadable(a:gitignore)
+function! s:WildignoreFromGitignore(gitpath, isAtRoot)
+  let gitignore = a:gitpath . "/.gitignore"
+  if filereadable(gitignore)
     let igstring = ''
-    for oline in readfile(a:gitignore)
+    for oline in readfile(gitignore)
+
       let line = substitute(oline, '\s|\n|\r', '', "g")
       if line =~ '^#' | con | endif
       if line == ''   | con | endif
       if line =~ '^!' | con | endif
-      if line =~ '/$' | let igstring .= "," . line . "*" | con | endif
-      let igstring .= "," . line
+
+      if a:isAtRoot
+        if line =~ '/$' 
+          let igstring .= "," . line . "*"
+        else
+          let igstring .= "," . line
+        endif
+      else
+        let fullPath = a:gitpath . "/" . line
+
+        if line =~ "/"
+          if fullPath =~ getcwd()
+            let pattern = fnamemodify(fullPath, ":.")
+            if pattern =~ "/$" 
+              pattern .= "*" 
+            endif
+            let igstring .= "," . pattern
+          endif
+        else
+          let igstring .= "," . line
+        endif
+      endif
+
     endfor
-    execute "set wildignore+=".substitute(igstring, '^,', '', "g")
+    execute "set wildignore+=" . substitute(igstring, '^,', '', "g")
 
     " Set ag's ignore
     if exists("g:RootIgnoreAgignore") && g:RootIgnoreAgignore
       let agignore = ''
-      for oline in readfile(a:gitignore)
+      for oline in readfile(gitignore)
         let line = substitute(oline, '\s|\n|\r', '', "g")
         if line =~ '^#' | con | endif
         if line == ''   | con | endif
@@ -54,11 +77,13 @@ function! s:RootIgnore()
   let gitdir = finddir(".git", ";")
   if gitdir != ""
     if gitdir == ".git" 
-      let gitignore = getcwd() . "/.gitignore"
+      let gitpath = getcwd()
+      let isAtRoot = 1
     elseif gitdir =~ "/"
-      let gitignore = fnamemodify(gitdir, ":h") . "/.gitignore"
+      let gitpath = fnamemodify(gitdir, ":h")
+      let isAtRoot = 0
     endif
-    call s:WildignoreFromGitignore(gitignore)
+    call s:WildignoreFromGitignore(gitpath, isAtRoot)
   endif
 endfunction
 

@@ -54,3 +54,8 @@ all results are under `foo/bar/`.
 
 ## License
 MIT
+
+## Update
+
+**02-04-2014**
+- Resolve folder-paths in .gitignore to paths relative to cwd
