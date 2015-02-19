@@ -40,7 +40,7 @@ function! s:WildignoreFromGitignore(gitpath, isAtRoot)
           if fullPath =~ getcwd()
             let pattern = fnamemodify(fullPath, ":.")
             if pattern =~ "/$" 
-              pattern .= "*" 
+              let pattern .= "*" 
             endif
             let igstring .= "," . pattern
           endif
