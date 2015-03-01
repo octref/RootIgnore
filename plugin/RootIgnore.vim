@@ -74,6 +74,11 @@ function! s:WildignoreFromGitignore(gitpath, isAtRoot)
 endfunction
 
 function! s:RootIgnore()
+  if !exists("g:RootIgnoreUseHome") || g:RootIgnoreUseHome
+    let home = finddir("~", ":p:h")
+    call s:WildignoreFromGitignore(home, 1)
+  endif
+
   let gitdir = finddir(".git", ";")
   if gitdir != ""
     if gitdir == ".git" 
