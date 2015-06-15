@@ -27,7 +27,13 @@ function! s:WildignoreFromGitignore(gitpath, isAtRoot)
       if line == ''   | con | endif
       if line =~ '^!' | con | endif
 
+
       if a:isAtRoot
+        " If line starts with a '/', remove it
+        if line =~ '^/'
+          let line = substitute(line, '/', '', '')
+        endif
+
         if line =~ '/$' 
           let igstring .= "," . line . "*"
         else
