@@ -2,6 +2,15 @@
 
 **Set 'wildignore' from git repo root or home folder**
 
+## Usage
+This plugin is designed to complement CtrlP & Command-T by automatically
+filtering search results according to `.gitignore` in your project, and
+the global `~/.gitignore`.
+
+There is a [script](http://www.vim.org/scripts/script.php?script_id=2557) by
+Adam Bellaire, but it doesn't respect `.gitignore` when you are in a subfolder
+of your project.
+
 ## Install
 #### Vundle
 
@@ -14,15 +23,15 @@ plugin 'octref/RootIgnore'
 let g:RootIgnoreUseHome = 1
 (Default: 1)
 ```
-Add patterns in ~/.gitignore to **wildignore**.
+Add patterns in ~/.gitignore to wildignore.
 
 ```
 let g:RootIgnoreAgignore = 1
 (Default: 0)
 ```
 **Requirement**: [**ag**](https://github.com/ggreer/the_silver_searcher)  
-Let RootIgnore set `ctrlp's g:ctrlp_user_command` to use **ag** to ignore
-the patterns found in repo root's gitignore.  
+Let RootIgnore set `ctrlp's g:ctrlp_user_command` to use **ag** for
+faster search.
 
 ===
 
@@ -40,21 +49,6 @@ let g:CommandTTraverseSCM = 'pwd'
 " If you want to add your own ignore pattern
 let g:CommandTWildIgnore = &wildignore . ',myPattern"
 ```
-
-## Usage
-After installation it works automatically.
-
-This plugin is designed to complement CtrlP & Command-T.
-Currently, there seems to be no easy way to:
-- Restrict search results to files under current directory
-- Honor `.gitignore` in repo root
-
-Adam Bellaire's [script](http://www.vim.org/scripts/script.php?script_id=2557) honors `.gitignore` when Vim is opened at repo root,
-but not when Vim is opened in subfolders under repo root.  
-
-If this plugin is present, when you `cd foo/bar/` and open Vim,
-and suppose `foo/.gitingore` ignores `_*`, CtrlP ignores `foo/bar/_build` and
-all results are under `foo/bar/`.
 
 ## Update
 
