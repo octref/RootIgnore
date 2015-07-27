@@ -86,16 +86,27 @@ function! s:RootIgnore()
   endif
 
   let gitdir = finddir(".git", ";")
-  if gitdir != ""
-    if gitdir == ".git" 
-      let gitpath = getcwd()
+
+  " At root
+  if gitdir == ".git" 
+    let gitpath = getcwd()
+    let isAtRoot = 1
+
+  " Not at root
+  elseif gitdir =~ "/"
+    let gitpath = fnamemodify(gitdir, ":h")
+    let isAtRoot = 0
+
+  " Not in a git folder
+  " Just check if current directory has a .gitignore
+  " If yes, add its patterns
+  else
+    if filereadable('.gitignore')
+      let gitpath = "."
       let isAtRoot = 1
-    elseif gitdir =~ "/"
-      let gitpath = fnamemodify(gitdir, ":h")
-      let isAtRoot = 0
     endif
-    call s:WildignoreFromGitignore(gitpath, isAtRoot)
   endif
+  call s:WildignoreFromGitignore(gitpath, isAtRoot)
 endfunction
 
 call s:RootIgnore()

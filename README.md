@@ -52,10 +52,13 @@ let g:CommandTWildIgnore = &wildignore . ',myPattern"
 
 ## Update
 
-**03-01-2015**
-- Include ~/.gitignore by default
-**02-04-2015**
-- Resolve folder-paths in .gitignore to paths relative to cwd
+
+- **07-27-2015**
+  - If we are not in a git folder, but have a .gitignore in current folder, use its patterns.
+- **03-01-2015**
+  - Include ~/.gitignore by default
+- **02-04-2015**
+  - Resolve folder-paths in .gitignore to paths relative to cwd
 
 ## Credit
 Adapted from [gitignore](http://www.vim.org/scripts/script.php?script_id=2557)
