@@ -52,7 +52,8 @@ let g:CommandTWildIgnore = &wildignore . ',myPattern"
 
 ## Update
 
-
+- **08-07-2015**
+  - Fix a bug for using .gitignore in non-git folder.
 - **07-27-2015**
   - If we are not in a git folder, but have a .gitignore in current folder, use its patterns.
 - **03-01-2015**
