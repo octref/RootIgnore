@@ -29,7 +29,7 @@ Add patterns in ~/.gitignore to wildignore.
 let g:RootIgnoreAgignore = 1
 (Default: 0)
 ```
-**Requirement**: [**ag**](https://github.com/ggreer/the_silver_searcher)  
+**Requirement**: [**ag**](https://github.com/ggreer/the_silver_searcher)
 Let RootIgnore set `ctrlp's g:ctrlp_user_command` to use **ag** for
 faster search.
 
@@ -52,6 +52,8 @@ let g:CommandTWildIgnore = &wildignore . ',myPattern"
 
 ## Update
 
+- **01-16-2018**
+  - Add regex whitespace ignore so whitespace lines in .gitignore aren't added to wildignore.
 - **08-07-2015**
   - Fix a bug for using .gitignore in non-git folder.
 - **07-27-2015**
