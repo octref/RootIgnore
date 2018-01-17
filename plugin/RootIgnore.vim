@@ -23,9 +23,10 @@ function! s:WildignoreFromGitignore(gitpath, isAtRoot)
     for oline in readfile(gitignore)
 
       let line = substitute(oline, '\s|\n|\r', '', "g")
-      if line =~ '^#' | con | endif
-      if line == ''   | con | endif
-      if line =~ '^!' | con | endif
+      if line =~ '^#'   | con | endif
+      if line == ''     | con | endif
+      if line =~ '^!'   | con | endif
+      if line =~ '^\s$' | con | endif
 
 
       if a:isAtRoot
