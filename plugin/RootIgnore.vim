@@ -63,7 +63,7 @@ function! s:WildignoreFromGitignore(gitpath, isAtRoot)
     if exists("g:RootIgnoreAgignore") && g:RootIgnoreAgignore
       let agignore = ''
       for oline in readfile(gitignore)
-        let line = substitute(oline, '\s|\n|\r', '', "g")
+        let line = substitute(oline, '\s', '\\ ', 'g')
         if line =~ '^#' | con | endif
         if line == ''   | con | endif
         if line =~ '^!' | con | endif
